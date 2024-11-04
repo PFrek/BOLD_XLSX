@@ -46,7 +46,11 @@ def get_namespace(root):
 def bold_shared_strings_xml(file_dict):
     target_sheet = "xl/sharedStrings.xml"
 
-    root = ET.fromstring(file_dict[target_sheet])
+    file_data = file_dict.get(target_sheet)
+    if file_data is None:
+        break # No more sheets to read
+
+    root = ET.fromstring(file_data)
 
     namespace = get_namespace(root)
 
